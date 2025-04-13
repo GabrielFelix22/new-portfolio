@@ -10,28 +10,7 @@ export const Container = styled.div`
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
-  /* padding: 0.5rem; */
-`;
-
-export const Header = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  /* padding: 1rem; */
-  gap: 4rem;
-
-  img {
-    height: 8rem;  // 128px
-    width: auto;
-  }
-`;
-
-export const TitleGroup = styled.div`
-  display: flex;
-  align-items: center;
-  max-width: 37.5rem;  // 600px
-  margin: 0 10rem;
-  gap: 2.25rem; // 36px
+  position: relative;
 `;
 
 export const Title = styled.h1`
@@ -66,6 +45,123 @@ export const Title = styled.h1`
   }
 `;
 
+export const MenuIcon = styled.div`
+  display: none;
+  cursor: pointer;
+  font-size: 2rem;
+  color: ${theme.colors.neutral};
+  
+  @media (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+  }
+`;
+
+export const Sidebar = styled.div`
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    right: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    background-color: ${theme.colors.black};
+    padding: 4rem;
+    transition: 0.3s ease-in-out;
+    z-index: 999;
+    box-shadow: ${({ isOpen }) => (isOpen ? '-5px 0 15px rgba(0, 0, 0, 0.3)' : 'none')};
+
+    button {
+      display: none;
+    }
+  }
+`;
+
+export const SidebarOverlay = styled.div`
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+  }
+`;
+
+
+export const Header = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
+  padding: 1rem;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  img {
+    height: 8rem;
+    width: auto;
+  }
+`;
+
+export const SidebarHeader = styled.div`
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+    
+    img {
+      height: 6rem;
+      width: auto;
+      margin-bottom: 1rem;
+    }
+  }
+`;
+
+
+
+export const TitleGroup = styled.div`
+  display: flex;
+  align-items: center;
+  max-width: 37.5rem;
+  margin: 0 2rem;
+  gap: 2.25rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+    margin: 0;
+    
+    ${Title} {
+      margin: 0.5rem 0;
+      font-size: 1.2rem;
+      
+      &::after {
+        bottom: -0.2rem;
+      }
+    }
+  }
+`;
+
+
+
 export const Contato = styled.div`
   margin-left: 2rem;
   padding: 0.25rem;
@@ -77,12 +173,13 @@ export const Interface = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-top: 10rem;  // 80px
+  margin-top: 10rem;
+  padding: 1rem;
 
-  @media (min-width: 768px) {
-    flex-direction: row;
-    align-items: center;
-    padding: 1rem;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    margin-top: 5rem;
+    text-align: center;
   }
 
   .text-content {
@@ -111,10 +208,14 @@ export const Interface = styled.div`
   }
 
   .image-container {
-    margin-left: 13rem;  // 208px
-    /* margin-right: 0.1rem;  // 16px */
+    margin-left: 13rem;
     flex-shrink: 0;
     animation: flutuar 2s ease-in-out infinite alternate;
+
+    @media (max-width: 768px) {
+      margin-left: 0;
+      margin-top: 2rem;
+    }
 
     @keyframes flutuar {
       0% {
@@ -192,7 +293,12 @@ export const Context = styled.div`
 export const EspecialidadesGroup = styled.div`
   display: flex;
   justify-content: center;
-  gap: 2rem;  // 32px
+  gap: 2rem;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+    align-items: center;
+  }
 
   .especialidades-box {
     max-width: 23.75rem;  // 380px
@@ -247,17 +353,16 @@ export const Softwares = styled.div``;
 // Estilos da sessão de sobre
 
 export const ContainerSobre = styled.div`
-  padding: 2.5rem 4%;  // 90px
-  margin: 12rem 0;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  /* gap: 2rem;  // 32px */
-  text-align: left;
-  color: ${theme.colors.white};
+  margin: 12rem 0;
+  padding: 2.5rem 4%;
 
   @media (max-width: 768px) {
-    flex-direction: column; // Empilha no mobile
+    flex-direction: column;
+    margin: 6rem 0;
+    padding: 1.5rem 2%;
     text-align: center;
   }
 `;
@@ -278,11 +383,14 @@ export const ImagemContainer = styled.div`
 `;
 
 export const TextSobre = styled.div`
-  max-width: 37.5rem;  // 600px
-  text-align: left;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  max-width: 37.5rem;
+  margin-left: 4rem;
+
+  @media (max-width: 768px) {
+    margin-left: 0;
+    margin-top: 2rem;
+    padding: 0 1rem;
+  }
 
   h2 {
     color: ${theme.colors.neutral};
@@ -297,6 +405,7 @@ export const TextSobre = styled.div`
   }
 
   p {
+    color: ${theme.colors.neutral};
     margin: 1rem;
     line-height: 1.5; // 24px
     text-align: justify;
@@ -306,11 +415,13 @@ export const TextSobre = styled.div`
 
 export const ContainerLinks = styled.div`
   display: flex;
-  justify-content: start;
-  align-items: flex-start;
-  gap: 1rem;  // 16px
-  margin-top: 1rem;  // 16px
-  margin-left: 0.75rem;  // 10px
+  gap: 1rem;
+  margin-top: 2rem;
+
+  @media (max-width: 768px) {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
 
   a button {
     width: 3.75rem;  // 60px
@@ -350,9 +461,12 @@ export const IconSocial = styled(SocialIcon)`
 export const SectionPortfolio = styled.div`
   padding: 2.5rem 4%;  // 40px
   box-shadow: 0 0 40px 5px ${theme.colors.primary};
-  justify-content: space-between;
-  margin-top: 70px;
-  display: flex;
+  margin-top: 4.375rem; // 70px
+  
+  @media (max-width: 768px) {
+    padding: 1.5rem 2%;
+    margin-top: 2rem;
+  }
 `;
 
 export const InterfacePortfolio = styled.div`
@@ -377,8 +491,14 @@ export const Projects = styled.div`
   justify-items: center;
   margin: 0 auto;
 
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
   .box {
-    width: 22.5rem;  // 360px
+    width: 100%;
+    max-width: 22.5rem;  // 360px
     height: 28.75rem; // 460px
     background-size: cover;
     background-position: 100% 0%;
@@ -490,7 +610,6 @@ export const Footer = styled.footer`
   color: ${theme.colors.white};
   padding: 2rem 1rem;
   margin-top: 4rem;
-  /* box-shadow: 0px -10px 40px 5px rgba(0, 102, 255, 0.4); */
 
   .interface {
     max-width: 1200px;
@@ -498,7 +617,12 @@ export const Footer = styled.footer`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1.5rem; // 24pxs
+    gap: 1.5rem; // 24px
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+      text-align: center;
+    }
 
     .logo img {
       max-width: 180px;
@@ -508,9 +632,12 @@ export const Footer = styled.footer`
 
   .borda {
     border-top: 1px solid ${theme.colors.info};
-    /* margin-top: 1rem; */
     padding-top: 1rem;
-    /* text-align: center; */
+    margin-top: 2rem;
+
+    @media (max-width: 768px) {
+      text-align: center;
+    }
 
     p {
       font-size: 0.9rem;

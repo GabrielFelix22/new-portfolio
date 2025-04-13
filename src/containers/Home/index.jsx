@@ -4,6 +4,7 @@ import project1 from "../../assets/projeto1.png";
 import project2 from "../../assets/projeto2.png";
 import project3 from "../../assets/projeto3.png";
 import Button from "../../components/button";
+import { useState } from 'react';
 
 import AOS from "aos";
 import { theme } from "../../themes/styles";
@@ -40,6 +41,13 @@ import {
 } from "./styles";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
+import { FaBars } from 'react-icons/fa';
+import {
+  MenuIcon,
+  Sidebar,
+  SidebarOverlay,
+  SidebarHeader,
+} from './styles';
 
 function Home() {
   useEffect(() => {
@@ -49,8 +57,41 @@ function Home() {
     });
   }, []);
 
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <Container>
+      <MenuIcon onClick={toggleSidebar}>
+        <FaBars />
+      </MenuIcon>
+
+      <SidebarOverlay isOpen={isSidebarOpen} onClick={toggleSidebar} />
+      
+      <Sidebar isOpen={isSidebarOpen}>
+        <SidebarHeader>
+          <img
+            src={header}
+            alt="logo name"
+            onContextMenu={(e) => e.preventDefault()}
+            onDragStart={(e) => e.preventDefault()}
+            draggable={false}
+          />
+        </SidebarHeader>
+        <TitleGroup>
+          <Title onClick={toggleSidebar}>Home</Title>
+          <Title onClick={toggleSidebar}>Especialidades</Title>
+          <Title onClick={toggleSidebar}>Sobre</Title>
+          <Title onClick={toggleSidebar}>Projetos</Title>
+        </TitleGroup>
+        <Contato>
+          <Button onClick={toggleSidebar}>Contato</Button>
+        </Contato>
+      </Sidebar>
+
       <Header data-aos-delay="100" data-aos="zoom-in">
         <img
           src={header}
