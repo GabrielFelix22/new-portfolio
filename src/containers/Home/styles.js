@@ -70,7 +70,7 @@ export const Sidebar = styled.div`
     align-items: flex-start;
     position: fixed;
     top: 0;
-    right: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    right: ${({ isOpen }) => (isOpen ? "0" : "-100%")};
     width: 70%;
     max-width: 300px;
     height: 100vh;
@@ -78,7 +78,7 @@ export const Sidebar = styled.div`
     padding: 4rem;
     transition: 0.3s ease-in-out;
     z-index: 999;
-    box-shadow: ${({ isOpen }) => (isOpen ? '-5px 0 15px rgba(0, 0, 0, 0.3)' : 'none')};
+    box-shadow: ${({ isOpen }) => (isOpen ? "-5px 0 15px rgba(0, 0, 0, 0.3)" : "none")};
 
     button {
       display: none;
@@ -90,7 +90,7 @@ export const SidebarOverlay = styled.div`
   display: none;
   
   @media (max-width: 768px) {
-    display: ${({ isOpen }) => (isOpen ? 'block' : 'none')};
+    display: ${(props) => (props.isOpen ? "block" : "none")};
     position: fixed;
     top: 0;
     left: 0;
@@ -100,7 +100,6 @@ export const SidebarOverlay = styled.div`
     z-index: 998;
   }
 `;
-
 
 export const Header = styled.div`
   display: flex;
@@ -134,8 +133,6 @@ export const SidebarHeader = styled.div`
   }
 `;
 
-
-
 export const TitleGroup = styled.div`
   display: flex;
   align-items: center;
@@ -159,8 +156,6 @@ export const TitleGroup = styled.div`
     }
   }
 `;
-
-
 
 export const Contato = styled.div`
   margin-left: 2rem;

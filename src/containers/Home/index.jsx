@@ -1,10 +1,12 @@
+import { useState } from "react";
 import header from "../../assets/felix-name.png";
 import logo from "../../assets/logo.png";
 import project1 from "../../assets/projeto1.png";
 import project2 from "../../assets/projeto2.png";
 import project3 from "../../assets/projeto3.png";
 import Button from "../../components/button";
-import { useState } from 'react';
+
+import curriculo from "../../assets/Gabriel Currículo.pdf";
 
 import AOS from "aos";
 import { theme } from "../../themes/styles";
@@ -41,13 +43,8 @@ import {
 } from "./styles";
 import "aos/dist/aos.css";
 import { useEffect } from "react";
-import { FaBars } from 'react-icons/fa';
-import {
-  MenuIcon,
-  Sidebar,
-  SidebarOverlay,
-  SidebarHeader,
-} from './styles';
+import { FaBars } from "react-icons/fa";
+import { MenuIcon, Sidebar, SidebarHeader, SidebarOverlay } from "./styles";
 
 function Home() {
   useEffect(() => {
@@ -63,6 +60,15 @@ function Home() {
     setIsSidebarOpen(!isSidebarOpen);
   };
 
+  const handleDownloadPDF = () => {
+    const link = document.createElement("a");
+    link.href = curriculo; // URL do arquivo PDF
+    link.download = "curriculo.pdf"; // Nome do arquivo PDF
+    document.body.appendChild(link); // Adiciona o link ao DOM
+    link.click();
+    document.body.removeChild(link); // Remove o link do DOM
+  };
+
   return (
     <Container>
       <MenuIcon onClick={toggleSidebar}>
@@ -70,7 +76,7 @@ function Home() {
       </MenuIcon>
 
       <SidebarOverlay isOpen={isSidebarOpen} onClick={toggleSidebar} />
-      
+
       <Sidebar isOpen={isSidebarOpen}>
         <SidebarHeader>
           <img
@@ -107,7 +113,7 @@ function Home() {
           <Title>Projetos</Title>
         </TitleGroup>
         <Contato>
-          <Button>Contato</Button>
+          <Button onClick={handleDownloadPDF}>Currículo</Button>
         </Contato>
       </Header>
       <Interface data-aos-delay="100" data-aos="zoom-in">
